@@ -25,6 +25,10 @@ class NotesController extends Controller
     public function create()
     {
         //
+        $isEdit = false;
+        // return view('notes.create-edit')->with('isEdit', $isEdit);
+        return view('notes.create-edit', compact(['isEdit']));
+        // return view('notes.create-edit', ['isEdit' => $isEdit]);
     }
 
     /**
@@ -35,7 +39,18 @@ class NotesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+        //validate
+        $request->validate([
+            "title" => "required",
+            "description" => "required",
+        ]);
+
+        $note = new Note();
+        $note->title = $request->title;
+        $note->description = $request->description;
+        $note->save();
+        return redirect()->route('notes.show', $note->id);
     }
 
     /**
@@ -61,6 +76,8 @@ class NotesController extends Controller
     public function edit(Note $note)
     {
         //
+        $isEdit = true;
+        return view('notes.create-edit', compact(['isEdit', 'note']));
     }
 
     /**
@@ -72,7 +89,17 @@ class NotesController extends Controller
      */
     public function update(Request $request, Note $note)
     {
-        //
+        //Update Note
+        $request->validate([
+            "title" => "required",
+            "description" => "required",
+        ]);
+
+        $note->title = $request->title;
+        $note->description = $request->description;
+        $note->update();
+
+        return redirect()->route('notes.show', $note->id);
     }
 
     /**
@@ -84,5 +111,8 @@ class NotesController extends Controller
     public function destroy(Note $note)
     {
         //
+        // dd($note);
+        $note->delete();
+        return redirect()->route('home');
     }
 }
