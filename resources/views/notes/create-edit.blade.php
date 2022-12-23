@@ -28,6 +28,13 @@
                     <div class="card-header">{{ __('Note') }}</div>
 
                     <div class="card-body">
+                        <div>
+                        @if ($error->any())
+                            @foreach ($error->all() as $e)
+                                {{$e}}
+                            @endforeach
+                        @endif
+                        </div>
                         {{-- change route notes 3 --}}
                         <form action="{{{ $isEdit ? route('notes.update', $note->id) : route('notes.store')}}}" method="POST">
                         @csrf

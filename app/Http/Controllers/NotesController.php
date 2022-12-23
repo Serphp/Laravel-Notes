@@ -15,6 +15,8 @@ class NotesController extends Controller
     public function index()
     {
         //
+        $notes = Note::all();
+        return view('notes.index')->with('notes', $notes);
     }
 
     /**
@@ -42,8 +44,9 @@ class NotesController extends Controller
         //dd($request);
         //validate
         $request->validate([
-            "title" => "required",
-            "description" => "required",
+            "title" => "required|min:8",
+            "description" => "required|min:12",
+            "test" => "required",
         ]);
 
         $note = new Note();
@@ -51,6 +54,7 @@ class NotesController extends Controller
         $note->description = $request->description;
         $note->save();
         return redirect()->route('notes.show', $note->id);
+        //return view('mi-vista')->with('error', $error);
     }
 
     /**
@@ -113,6 +117,6 @@ class NotesController extends Controller
         //
         // dd($note);
         $note->delete();
-        return redirect()->route('home');
+        return redirect()->route('notes.index');
     }
 }
