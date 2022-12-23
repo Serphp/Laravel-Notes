@@ -23,7 +23,12 @@ Route::get('/', function () {
 
 //Route::get('/notes/{note}', [NotesController::class, 'show']);
 
-Route::resource('notes', NotesController::class);
+Route::middleware(['auth'])->group(function () {
+    //
+    Route::resource('notes', NotesController::class);
+});
+
+
 
 Auth::routes();
 
