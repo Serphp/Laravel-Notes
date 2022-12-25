@@ -28,13 +28,13 @@
                     <div class="card-header">{{ __('Note') }}</div>
 
                     <div class="card-body">
-                        <div>
+                        {{-- <div>
                         @if ($error->any())
                             @foreach ($error->all() as $e)
                                 {{$e}}
                             @endforeach
                         @endif
-                        </div>
+                        </div> --}}
                         {{-- change route notes 3 --}}
                         <form action="{{{ $isEdit ? route('notes.update', $note->id) : route('notes.store')}}}" method="POST">
                         @csrf
@@ -43,7 +43,7 @@
                         @endif
 
                         <div class="row mb-3">
-                            <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('Titulo') }}
+                            <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('Title') }}
                             </label>
 
                             <div class="col-md-6">

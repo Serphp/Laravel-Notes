@@ -49,11 +49,12 @@
                     </thead>
 
                     <tbody>
-                        @foreach (\App\Models\Note::all() as $item)
+                        @foreach ($notes as $item)
+                        {{-- @foreach (\App\Models\Note::all() as $item) --}}
                             <tr>
-                                <td>{{ $item->title }}</td>
-                                <td>{{ $item->created_at }}</td>
-                                <td>{{ $item->description }}</td>
+                                <td>{!! e($item->title) !!}</td>
+                                <td>{!! e($item->created_at) !!}</td>
+                                <td>{!! e($item->description) !!}</td>
                                 <td><a href="{{ route('notes.show', $item->id) }}"> Show </a></td>
                                 <td><a href="{{ route('notes.edit', $item->id) }}"> Edit </a></td>
                                 <td>

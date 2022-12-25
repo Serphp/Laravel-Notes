@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Note;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotesController extends Controller
 {
@@ -15,7 +16,9 @@ class NotesController extends Controller
     public function index()
     {
         //
-        $notes = Note::all();
+        //dd(Auth::user()->id);
+        //$notes = Note::all();
+        $notes = Note::where('user_id', Auth::user()->id)->get();
         return view('notes.index')->with('notes', $notes);
     }
 
@@ -28,8 +31,8 @@ class NotesController extends Controller
     {
         //
         $isEdit = false;
-        // return view('notes.create-edit')->with('isEdit', $isEdit);
-        return view('notes.create-edit', compact(['isEdit']));
+        //return view('notes.create-edit', compact(['isEdit']));
+        return view('notes.create-edit')->with('isEdit', $isEdit);
         // return view('notes.create-edit', ['isEdit' => $isEdit]);
     }
 
@@ -44,14 +47,15 @@ class NotesController extends Controller
         //dd($request);
         //validate
         $request->validate([
-            "title" => "required|min:8",
-            "description" => "required|min:12",
-            "test" => "required",
+            "title" => "required",
+            "description" => "required",
+            //"test" => "required",
         ]);
 
         $note = new Note();
         $note->title = $request->title;
         $note->description = $request->description;
+        $note->user_id = Auth::user()->id;
         $note->save();
         return redirect()->route('notes.show', $note->id);
         //return view('mi-vista')->with('error', $error);
@@ -63,6 +67,11 @@ class NotesController extends Controller
      * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('admin')->only('show', 'edit', 'update', 'destroy');
+    }
     public function show(Note $note)
     {
         //$note = Note::find($note->id);
@@ -81,7 +90,8 @@ class NotesController extends Controller
     {
         //
         $isEdit = true;
-        return view('notes.create-edit', compact(['isEdit', 'note']));
+        return view('notes.create-edit')->with('isEdit', $isEdit)->with('note', $note);
+        //return view('notes.create-edit', compact(['isEdit', 'note']));
     }
 
     /**
@@ -94,6 +104,8 @@ class NotesController extends Controller
     public function update(Request $request, Note $note)
     {
         //Update Note
+        //"title" => "required|min:8|unique:notes,title",
+        //"description" => "required|min:12",
         $request->validate([
             "title" => "required",
             "description" => "required",
@@ -101,6 +113,7 @@ class NotesController extends Controller
 
         $note->title = $request->title;
         $note->description = $request->description;
+        $note->user_id = Auth::user()->id;
         $note->update();
 
         return redirect()->route('notes.show', $note->id);
