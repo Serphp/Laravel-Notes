@@ -1,24 +1,5 @@
 @extends('layouts.app')
 
-<style>
-    button {
-        border-radius: 5px 5px  5px 5px;
-        margin: 5px;
-        padding: 5px;
-        background-color: rgba(0, 0, 0, 0.1);
-        border: none;
-
-    }
-
-    button:hover {
-        text-decoration: underline;
-        background-color: rgba(0, 0, 0, 0.326); 
-    }
-    a {
-        text-decoration: none;
-        font-weight: bold;
-    }
-</style>
 
 @section('content')
     <div class="container">
@@ -52,21 +33,35 @@
                             </div>
 
                             <div class="mb-3"></div>
-
                             <label for="title"
                                 class="col-md-4 col-form-label text-md-end">{{ __('Description') }}</label>
-
                             <div class="col-md-6">
                                 <textarea id="description" type="text" class="form-control" name="description"> 
                                     {{$isEdit ? $note->description : ''}}
                                 </textarea>
                             </div>
 
+                            <div class="mb-3"></div>
+                            <label for="title"
+                                class="col-md-4 col-form-label text-md-end">{{ __('Share Notes') }}</label>
+                            <div class="col-md-6">
+                                <select name="share[]" class="selectm" id="share" multiple>
+                                    {{-- muestra los usuarios exepto al creador de la nota --}}
+                                    @foreach (App\Models\User::all()->except(Auth::id()) as $user)
+                                        <option value="{{$user->id}}" 
+                                            {{$isEdit && $note->share == $user->id ? 'selected' : ''}}>
+                                            {{$user->name}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="row mb-0">
                                 <div class="col-md-8 offset-md-4">
-
+                                    <div class="bcontainer">
                                 <button type="submit" class=""> {{$isEdit ? "Update" : "Create"}} </button>
                                 {{-- <a href="{{{route('notes.destroy', $note->id)}}}"> Delete </a> --}}
+                                    </div>
                             </form>
                             </div>
                             </div>

@@ -13,13 +13,20 @@ class NotesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('admin')->only('show', 'edit', 'update', 'destroy');
+    }
+
     public function index()
     {
         //
-        //dd(Auth::user()->id);
+        //dd(Auth::User()->id);
         //$notes = Note::all();
         $notes = Note::where('user_id', Auth::user()->id)->get();
         return view('notes.index')->with('notes', $notes);
+        //return view('notes.index', compact(['notes']));
     }
 
     /**
@@ -68,10 +75,6 @@ class NotesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
-    {
-        $this->middleware('admin')->only('show', 'edit', 'update', 'destroy');
-    }
     public function show(Note $note)
     {
         //$note = Note::find($note->id);
@@ -106,15 +109,20 @@ class NotesController extends Controller
         //Update Note
         //"title" => "required|min:8|unique:notes,title",
         //"description" => "required|min:12",
+
+        //dd($request);
         $request->validate([
             "title" => "required",
             "description" => "required",
+
         ]);
 
         $note->title = $request->title;
         $note->description = $request->description;
         $note->user_id = Auth::user()->id;
         $note->update();
+        //$note->shared()->sync($request->shared);
+        $note->shared()->attach($request->shared);
 
         return redirect()->route('notes.show', $note->id);
     }

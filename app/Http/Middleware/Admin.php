@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Admin
+class admin
 {
     /**
      * Handle an incoming request.
@@ -17,12 +17,16 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
+        // dd($request);
+        // return $next($request);
+
         $note = $request->route('note');
         if ($note->user_id != Auth::user()->id) {
-            return redirect()->route('notes.index');
-        } else {
+            //return redirect()->route('notes.index');
             abort(403, 'Unauthorized action.');
+        } else {
+            return $next($request);
         }
-        //return $next($request);
+        //
     }
 }

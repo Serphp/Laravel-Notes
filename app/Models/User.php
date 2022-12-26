@@ -42,7 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function notes(){
+    public function notes()
+    {
         return $this->hasMany(Note::class);
+    }
+    public function shared()
+    {
+        return $this->belongsToMany(User::class, 'note_user');
     }
 }
