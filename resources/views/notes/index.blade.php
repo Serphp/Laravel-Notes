@@ -37,8 +37,8 @@ use Carbon\Carbon;
                         {{-- @foreach (\App\Models\Note::all() as $item) --}}
                             <tr>
                                 <td>{!! e($item->title) !!}</td>
-                                {{-- <td>{!! e($item->created_at) !!}</td> --}}
-                                <td>{!! e($item->created_at->diffForHumans) !!}</td>
+                                <td>{!! e(Carbon::parse($item->created_at)->diffForHumans()) !!}</td>
+                                
                                 <td>{!! e($item->description) !!}</td>
                                 <div class="bcontainer">
                                 <td><button class="button"><a  href="{{ route('notes.show', $item->id) }}">Show </a></button></td>
