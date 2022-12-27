@@ -12,15 +12,23 @@ use Carbon\Carbon;
                     <h1> Notes </h1>
                     <h2>| Bienvenida </h2>
                     
-                    <div class="bcontainer2">
-                    <div class="flex1">
-                    <button type="button" onclick="window.location='{{ route('notes.create') }}'"> Create </button>
+                <div class="card2">
+                    <h3> Titulo de nota </h3>
+                    <div class="container3">
+                        <div class="flex1">
+                        <button type="button" onclick="window.location='{{ route('notes.create') }}'"> Create </button>
+                        </div>
+                        <div class="flex2">
+                            <h2> Hola </h2>
+                        </div>
                     </div>
-                    <div class="flex2">
-                        <h2> Hola </h2>
-                    </div>
+                        <div class="newliner">
+                        Probando el flexbox 
+                        </div>
                 </div>
+                {{-- end justify --}}
                 </div>
+
                 <div class="container">
                 <table class="table">
                     <thead>

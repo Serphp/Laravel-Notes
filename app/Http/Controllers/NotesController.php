@@ -64,6 +64,8 @@ class NotesController extends Controller
         $note->description = $request->description;
         $note->user_id = Auth::user()->id;
         $note->save();
+
+        $note->shared()->attach($request->shared);
         return redirect()->route('notes.show', $note->id);
         //return view('mi-vista')->with('error', $error);
     }
@@ -114,7 +116,7 @@ class NotesController extends Controller
         $request->validate([
             "title" => "required",
             "description" => "required",
-
+            //"shared" => "required",
         ]);
 
         $note->title = $request->title;
@@ -122,7 +124,7 @@ class NotesController extends Controller
         $note->user_id = Auth::user()->id;
         $note->update();
         //$note->shared()->sync($request->shared);
-        $note->shared()->attach($request->shared);
+        $note->shared()->attach($request->share);
 
         return redirect()->route('notes.show', $note->id);
     }

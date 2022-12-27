@@ -28,10 +28,20 @@
                                 <textarea id="description" type="text" class="form-control" name="description" required readonly> {{ $note->description }} </textarea>
                             </div>
 
+                            <div class="row mb-3">
+                                <label for="description" class="col-md-4 col-form-label text-md-end">
+                                    {{ __('Share with:') }}
+                                    <ul>
+                                    @foreach ($note->shared as $u)
+                                        <li>{{ $u->name }}</li>
+                                    @endforeach
+                                    <ul>
+                                </label>
+                            </div>
+
                             <div class="row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <div class="container">
-
                                 <form action="{{{route('notes.destroy', $note->id)}}}" method="post">
                                     @csrf
                                     @method('DELETE')
