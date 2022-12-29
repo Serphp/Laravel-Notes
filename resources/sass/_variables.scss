@@ -20,6 +20,7 @@ body {
     flex-wrap: wrap;
     align-items: center;
 }
+
 @media (min-width: 600px) {
     .rowserph {
         display: flex !important;
@@ -34,6 +35,11 @@ body {
     background: rgba(255, 255, 255, 0.498) !important;
 }
 
+.dropdown-menu {
+    backdrop-filter: blur(10px) !important;
+    background: rgba(255, 255, 255, 0.498) !important;
+}
+
 .navbar-blur {
         background: rgba(255, 255, 255, 0.441) !important;
         backdrop-filter: blur(15px) !important;
@@ -45,7 +51,7 @@ body {
     align-items: center;
     }
 
-    .logo {
+.logo {
         font-family: monospace;
         font-size: 1.5rem;
         font-weight: 300;
@@ -53,6 +59,7 @@ body {
         word-spacing: 3px;
         //border: #333 solid 1px;
     }
+
 .card2 {
     width: 100%;
     //display: block;
@@ -181,8 +188,8 @@ body {
     }
 
 
-button {
-    background-color: #333;
+.buttont {
+    //background-color: #333;
     backdrop-filter: blur(10px);
     color: #fff;
 }
@@ -196,6 +203,7 @@ button {
     backdrop-filter: blur(15px);
     color: black;
     background: rgba(255, 255, 255, 0.441);
+    margin-left: 10px;
     }
 
 button:hover {

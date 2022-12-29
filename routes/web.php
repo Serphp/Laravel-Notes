@@ -28,8 +28,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('notes', NotesController::class);
 });
 
-
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/misnotas', [App\Http\Controllers\misnotasController::class, 'index'])->name('misnotas');

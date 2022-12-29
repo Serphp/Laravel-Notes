@@ -88,16 +88,15 @@
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         
                                             <i class="fa-solid fa-user"></i> 
-                                            <span> {{ Auth::user()->name }} </span>
+                                            <a> {{ Auth::user()->name }} </a>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('notes.index') }}"> Notes </a>
-                                <a class="dropdown-item" href="#"> Mis Notas </a>
-                                <a class="dropdown-item" href="#"> Configuración </a>
+                                <a class="dropdown-item" href="{{ route('notes.index') }}"> Notas  </a>
+                                <a class="dropdown-item" href="{{ route('misnotas') }}"> Mis notas </a>
+                                <a class="dropdown-item" href="{{ route('home') }}"> Perfil </a>
 
                                 </div>
-
                             </li>
                         @endguest
                     </ul>
