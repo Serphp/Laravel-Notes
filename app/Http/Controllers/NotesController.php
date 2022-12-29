@@ -66,6 +66,7 @@ class NotesController extends Controller
         $note->title = $request->title;
         $note->description = $request->description;
         $note->user_id = Auth::user()->id;
+        //$note->role = Auth::user()->role;
         $note->save();
 
         $note->shared()->attach($request->share);

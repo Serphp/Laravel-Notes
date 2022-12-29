@@ -20,11 +20,10 @@ class admin
         // dd($request);
         // return $next($request);
 
-        $note = $request->route('note'); // || Auth::user()->role == 'admin'
+        $note = $request->route('note');
         if ($note->user_id != Auth::user()->id || $note->shared->contains(Auth::user()->id)) {
             abort(403, 'Unauthorized action.');
         } else {
-
             return $next($request);
         }
         //
