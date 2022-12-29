@@ -25,8 +25,11 @@ class NotesController extends Controller
         //dd(Auth::User()->id);
         //$notes = Note::all();
         $notes = Note::where('user_id', Auth::user()->id)->get();
+        $other = Note::whereHas('shared', function ($query) {
+            $query->where('user_id', Auth::user()->id);
+        })->get();
+        $notes = $notes->merge($other);
         return view('notes.index')->with('notes', $notes);
-        //return view('notes.index', compact(['notes']));
     }
 
     /**
@@ -56,7 +59,7 @@ class NotesController extends Controller
         $request->validate([
             "title" => "required",
             "description" => "required",
-            //"test" => "required",
+            "share" => "required",
         ]);
 
         $note = new Note();
@@ -65,7 +68,7 @@ class NotesController extends Controller
         $note->user_id = Auth::user()->id;
         $note->save();
 
-        $note->shared()->attach($request->shared);
+        $note->shared()->attach($request->share);
         return redirect()->route('notes.show', $note->id);
         //return view('mi-vista')->with('error', $error);
     }
@@ -124,6 +127,8 @@ class NotesController extends Controller
         $note->user_id = Auth::user()->id;
         $note->update();
         //$note->shared()->sync($request->shared);
+
+        $note->shared()->detach();
         $note->shared()->attach($request->share);
 
         return redirect()->route('notes.show', $note->id);
@@ -139,6 +144,7 @@ class NotesController extends Controller
     {
         //
         // dd($note);
+        $note->shared()->detach();
         $note->delete();
         return redirect()->route('notes.index');
     }
