@@ -23,25 +23,21 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    
 </head>
 
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-blur shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Serph Notas
-                </a>
                 @guest
                 @if (Route::has('login')) 
-                
-                
-
+                    {{-- nothing --}}
                 @endif
                 @if (Route::has('register'))
-                        <a class="buttonCreate" href="{{ route('register') }}">
+                        {{-- <a class="buttonCreate" href="{{ route('register') }}">
                             <i class="fa-solid fa-plus"></i>
-                        </a>
+                        </a> --}}
                 @endif
                 @else
                 <a class="buttonCreate" href="{{ route('logout') }}"
@@ -53,6 +49,10 @@
                     @csrf
                 </form>
                 @endguest
+
+                <div class="logo">
+                    <h2> Serph Notas</h2>
+                </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -93,11 +93,11 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('notes.index') }}"> Notes </a>
+                                <a class="dropdown-item" href="#"> Mis Notas </a>
+                                <a class="dropdown-item" href="#"> Configuración </a>
+
                                 </div>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
-                                </div>
                             </li>
                         @endguest
                     </ul>
@@ -105,7 +105,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-5">
             @yield('content')
         </main>
     </div>

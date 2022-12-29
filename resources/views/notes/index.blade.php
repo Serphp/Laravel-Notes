@@ -14,7 +14,7 @@ card2.addEventListener('click', () => {
 
 </script>
 @section('content')
-        <div class="row justify-content-center">
+        <div class="rowserph">
             <div class="col-md-8">
                     <div class="container3">
                         <div class="flex1">
@@ -26,6 +26,9 @@ card2.addEventListener('click', () => {
                     <div class="card2">
                         <div class="xcontainer">
                             <div class="flexbutton">
+                                {{-- @if ($user->role == 'admin')
+                                <button>Hacer algo</button>
+                                @endif --}}
                 <h5><a  href="{{ route('notes.show', $item->id) }}"> 
                     {!! e($item->title) !!} </a>
                             </div>

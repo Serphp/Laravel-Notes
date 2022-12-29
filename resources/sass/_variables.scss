@@ -7,7 +7,26 @@ $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
 body {
-    background-image: url('https://c.wallhere.com/images/9a/a2/d0bc06734c4430beac47d6b4934b-1501199.jpg!d') !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('https://images.unsplash.com/photo-1672274696005-80d5f259d941?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80') !important;
+}
+
+.rowserph {
+    width: 100%;
+    //max-width: 980px;
+    //display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+@media (min-width: 600px) {
+    .rowserph {
+        display: flex !important;
+        width: 100%;
+        //max-width: 480px;
+        flex-direction: column;
+    }
 }
 
 .card {
@@ -26,6 +45,14 @@ body {
     align-items: center;
     }
 
+    .logo {
+        font-family: monospace;
+        font-size: 1.5rem;
+        font-weight: 300;
+        text-align: center;
+        word-spacing: 3px;
+        //border: #333 solid 1px;
+    }
 .card2 {
     width: 100%;
     //display: block;
@@ -61,12 +88,12 @@ body {
         margin: 0 0 -20px 0;
         padding: 0 0 0 5px;
         //border: #333 solid 1px;
+        .xicon {
+            margin: 0 5px 0 10px;
+            padding: 10px;
+        }
     }
 
-    .xicon {
-        margin: 0 5px 0 10px;
-        padding: 10px;
-    }
 
     .xname {
         margin: 5px;
@@ -142,7 +169,7 @@ body {
     }
 
     a {
-        color: black;
+        color: inherit;
         text-decoration: none !important;
         font-weight: bold;
     }
@@ -154,10 +181,10 @@ body {
     }
 
 
-.button {
+button {
     background-color: #333;
     backdrop-filter: blur(10px);
-    //color: #fff;
+    color: #fff;
 }
 
 .buttonCreate {
@@ -176,7 +203,7 @@ button:hover {
     color: #222;
     font-size: 1em;
     border-radius: 10px;
-    //background-color: rgba(255, 255, 255, 0.936); 
+    background-color: rgba(255, 255, 255, 0.74); 
     backdrop-filter: blur(10px);
 }
 
