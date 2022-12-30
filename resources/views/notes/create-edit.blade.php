@@ -24,7 +24,8 @@
                         @endif
 
                         <div class="row mb-3">
-                            <label for="title" class="col-md-3 col-form-label text-md-end">{{ __('Title') }}
+                            <label for="title" class="col-md-3 col-form-label text-md-end">
+                                <h5> {{ __('Title') }} </h5>
                             </label>
 
                             <div class="col-md-6">
@@ -34,16 +35,20 @@
 
                             <div class="mb-3"></div>
                             <label for="title"
-                                class="col-md-3 col-form-label text-md-end">{{ __('Description') }}</label>
+                                class="col-md-3 col-form-label text-md-end">
+                                <h5>  {{ __('Description') }} </h5>
+                            </label>
                             <div class="col-md-6">
-                                <textarea id="description" type="description" class="form" name="description"> 
-                                    {{$isEdit ? $note->description : htmlspecialchars('description')}}
+                                <textarea id="description" type="description" class="form" name="description" value=""> 
+                                    {{$isEdit ? $note->description : htmlspecialchars('')}}
                                 </textarea>
                             </div>
 
                             <div class="mb-3"></div>
                             <label for="title"
-                                class="col-md-3 col-form-label text-md-end">{{ __('Share Notes') }}</label>
+                                class="col-md-3 col-form-label text-md-end">
+                                <h5> {{ __('Share Notes') }} </h5>
+                                </label>
                             <div class="col-md-6">
                                 <select name="share[]" class="selectm form" id="share" multiple>
                                     {{-- muestra los usuarios exepto al creador de la nota --}}

@@ -14,8 +14,10 @@ use Carbon\Carbon;
                     <button id="button2">Mostrar imagen</button>
                     <div id="output"></div> --}}
 
-                        <div class="flex1">
-                        <button class="buttonCreate" type="button" onclick="window.location='{{ route('notes.create') }}'"> Create Note </button>
+                    <div class="flex1">
+                        <button class="buttonHome" type="button" onclick="window.location='{{ route('notes.create') }}'"> 
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
                         </div>
                     </div>
 

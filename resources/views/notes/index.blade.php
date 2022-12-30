@@ -57,10 +57,8 @@ use Carbon\Carbon;
                                 <i class="fa-regular fa-user-group"></i>
                             </div>
                                 </div>
-               
                             @endif
-
-                                                    
+                        
                             <div class="xname">
                                 {!! e($item->user->name) !!}
                             </div>
