@@ -15,7 +15,9 @@ use Carbon\Carbon;
                     <div id="output"></div> --}}
 
                         <div class="flex1">
-                        <button class="buttonCreate" type="button" onclick="window.location='{{ route('notes.create') }}'"> Create Note </button>
+                        <button class="buttonHome" type="button" onclick="window.location='{{ route('notes.create') }}'"> 
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
                         </div>
                     </div>
 
@@ -23,33 +25,46 @@ use Carbon\Carbon;
                     <div class="card2">
                         <div class="xcontainer">
                             <div class="flexbutton">
-                                {{-- @if ($user->role == 'admin')
-                                <button>Hacer algo</button>
-                                @endif --}}
-                <h5><a  href="{{ route('notes.show', $item->id) }}"> 
-                    {!! e($item->title) !!} </a>
+                                <h5>
+                                <a class="titulo" href="{{ route('notes.show', $item->id) }}"> 
+                                {!! e($item->title) !!}
+                                </a>
+                                </h5>
+                                
+                                @if ($item->user_id == Auth::id())
+                                </div>
+                                @if ($item->user->role == 'admin')
+                                <div class="xicon">
+                                <a href="{{ route('notes.show', $item->id) }}">
+                                <i class="fa-solid fa-eye"></i>
+                                </a>
+                                </div>
+                                @endif
+                                <div class="xicon">
+                                <a href="{{ route('notes.edit', $item->id) }}">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                </div>
+                                <div class="xicon">  {{-- ICONO DELETE  --}}
+                                <a href="{{ route('notes.destroy', $item->id) }}">                             
+                                <i class="fa-solid fa-trash"></i>
+                                </a>
                             </div>
-                            
-                        <div class="xicon">
-                            <a href="{{ route('notes.show', $item->id) }}">
-                            <i class="fa-solid fa-eye"></i>
-                            </a>
-                        </div>
-                        <div class="xicon">
-                            <a href="{{ route('notes.edit', $item->id) }}">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
-                        </div>
-                        <div class="xicon">  {{-- ICONO DELETE  --}}
-                        <a href="{{ route('notes.destroy', $item->id) }}">                             
-                        <i class="fa-solid fa-trash"></i>
-                        </a>
-                        </div>
-                    </div>
-                    <div class="xname">
-                        {!! e($item->user->name) !!}
-                    </div>
-                    
+                            </div>
+                            @else
+                            </div>
+                            <div class="xicon">
+                                <i class="fa-regular fa-user-group"></i>
+                            </div>
+                                </div>
+               
+                            @endif
+
+                                                    
+                            <div class="xname">
+                                {!! e($item->user->name) !!}
+                            </div>
+
                     <div class="content">
                     <div class="description">
                     {!! e($item->description) !!}
@@ -65,24 +80,6 @@ use Carbon\Carbon;
                 </div>
         @endforeach
 @endsection
-
-<script>
-document.getElementById("button1").addEventListener("click", function() {
-  document.getElementById("output").innerHTML = "Este es el texto que se muestra al hacer clic en el botón 1";
-});
-
-document.getElementById("button2").addEventListener("click", function() {
-  document.getElementById("output").innerHTML = '<img src="path/to/image.jpg" alt="Imagen">';
-});
-
-document.getElementById("button1").addEventListener("click", function() {
-  document.getElementById("output").innerHTML = "";
-});
-
-document.getElementById("button2").addEventListener("click", function() {
-  document.getElementById("output").innerHTML = "";
-});
-</script>
 
 {{-- <div class="container">
     <table class="table">

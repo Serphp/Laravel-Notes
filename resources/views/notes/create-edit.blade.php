@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="rowserph">
             <div class="col-md-8">
                 <div class="">
                     <h2 style="color: white;">{{ __('Note') }}</h2>
@@ -36,8 +36,8 @@
                             <label for="title"
                                 class="col-md-3 col-form-label text-md-end">{{ __('Description') }}</label>
                             <div class="col-md-6">
-                                <textarea id="description" type="text" class="form-control" name="description"> 
-                                    {{$isEdit ? $note->description : ''}}
+                                <textarea id="description" type="description" class="form" name="description"> 
+                                    {{$isEdit ? $note->description : htmlspecialchars('description')}}
                                 </textarea>
                             </div>
 
@@ -45,7 +45,7 @@
                             <label for="title"
                                 class="col-md-3 col-form-label text-md-end">{{ __('Share Notes') }}</label>
                             <div class="col-md-6">
-                                <select name="share[]" class="selectm" id="share" multiple>
+                                <select name="share[]" class="selectm form" id="share" multiple>
                                     {{-- muestra los usuarios exepto al creador de la nota --}}
                                     @foreach (App\Models\User::all()->except(Auth::id()) as $user)
                                         <option value="{{$user->id}}" 
@@ -59,6 +59,7 @@
                             <div class="row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <div class="bcontainer">
+                                        <button type="button" class="buttonCreate" onclick="window.location='{{ route('notes.index') }}'"> Back </button>
                                 <button type="submit" class="buttonCreate"> {{$isEdit ? "Update" : "Create"}} </button>
                                 {{-- <a href="{{{route('notes.destroy', $note->id)}}}"> Delete </a> --}}
                                     </div>

@@ -30,28 +30,9 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-blur shadow-sm">
             <div class="container">
-                @guest
-                @if (Route::has('login')) 
-                    {{-- nothing --}}
-                @endif
-                @if (Route::has('register'))
-                        {{-- <a class="buttonCreate" href="{{ route('register') }}">
-                            <i class="fa-solid fa-plus"></i>
-                        </a> --}}
-                @endif
-                @else
-                <a class="buttonCreate" href="{{ route('logout') }}"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                </a>
-        
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-                @endguest
-
+                
                 <div class="logo">
-                    <h2> Serph Notas</h2>
+                    /SerphNotas
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -83,13 +64,19 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-
+                                <a> {{ Auth::user()->name }} </a>
                                     <a class="buttonCreate dropdown-toggle" id="navbarDropdown" class="nav-link" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        
                                             <i class="fa-solid fa-user"></i> 
-                                            <a> {{ Auth::user()->name }} </a>
-                                </a>
+
+                                            <a class="buttonCreate" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="fa-solid fa-right-from-bracket"></i>
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
+                                            </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('notes.index') }}"> Notas  </a>
